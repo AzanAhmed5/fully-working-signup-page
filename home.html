@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home_ Instagram</title>
+  <style>
+    body {
+      background-color: black;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: #00ffff;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      background-color: rgb(15, 26, 185);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: rgb(10, 20, 150);
+    }
+  </style>
+</head>
+<body>
+  <h1 id="welcome-text">🎉 Welcome!</h1>
+  <p>You're successfully logged in.</p>
+  
+
+  <script>
+    const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+
+    if (!user) {
+      alert("Please log in first!");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("welcome-text").innerText = `🎉 Welcome, ${user.username}!`;
+    }
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login • Instagram</title>
+  <style>
+    body {
+      background-color: black;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .login-box {
+      border: 1px solid gray;
+      width: 350px;
+      padding: 20px;
+      text-align: center;
+      background-color: #000;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid gray;
+      background-color: black;
+      color: white;
+      border-radius: 3px;
+    }
+
+    .login-btn {
+      background-color: rgb(15, 26, 185);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      width: 90%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    a {
+      color: #0095f6;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h1>Instagram</h1>
+
+    <input type="text" id="email" placeholder="Enter Email or Username" required>
+    <input type="password" id="password" placeholder="Enter Password" required>
+
+    <button class="login-btn" onclick="login()">Log In</button>
+
+    <p>Don't have an account? 
+      <a href="signup.html">Sign Up</a>
+    </p>
+    <img src="google play.png" alt="" style="height: 60px; width:200 ;">
+  <img src="microsoft.png" alt="" style="width: 190px; height: 60px;">
+  </div>
+
+
+  <script>
+    function login() {
+      const emailOrUser = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      let users = JSON.parse(sessionStorage.getItem('users')) || [];
+
+      
+      const found = users.find(u =>
+        (u.email === emailOrUser || u.username === emailOrUser) &&
+        u.password === password
+      );
+
+      if (found) {
+        alert(`Welcome, ${found.username}!`);
+        sessionStorage.setItem('loggedInUser', JSON.stringify(found));
+        window.location.href = "home.html";
+      } else {
+        alert("Invalid username/email or password!");
+      }
+    }
+  </script>
+</body>
+</html>

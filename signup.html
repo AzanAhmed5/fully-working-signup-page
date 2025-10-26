@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up-Instagram</title>
+  <style>
+    body {
+      background-color: black;
+      font-family: Helvetica, Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .signup-box {
+      border: 1px solid gray;
+      width: 350px;
+      padding: 20px;
+      text-align: center;
+      background-color: #000;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid gray;
+      background-color: black;
+      color: white;
+      border-radius: 3px;
+    }
+
+    .signup-btn {
+      background-color: rgb(15, 26, 185);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      width: 90%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    a {
+      color: #0095f6;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-box">
+    <h1>Instagram</h1>
+
+    <input type="text" id="username" placeholder="Enter Username" required>
+    <input type="number" id="number" placeholder="Enter Phone Number" required>
+    <input type="email" id="email" placeholder="Enter Email" required>
+    <input type="password" id="password" placeholder="Enter Password" required>
+
+    <button class="signup-btn" onclick="signup()">Sign Up</button>
+
+    <p>Already have an account? 
+      <a href="login.html">Log In</a>
+    </p>
+   <img src="google play.png" alt="" style="height: 60px; width:200 ;">
+<img src="microsoft.png" alt="" style="width: 190px; height: 60px;">
+  </div>
+
+
+  <script>
+    function signup() {
+      const username = document.getElementById('username').value.trim();
+      const number = document.getElementById('number').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !email || !password) {
+        alert("Please fill all fields!");
+        return;
+      }
+
+      let users = JSON.parse(sessionStorage.getItem('users')) || [];
+
+
+      
+      users.push({ username, number, email, password });
+
+      
+      sessionStorage.setItem('users', JSON.stringify(users));
+
+      alert("Account created successfully! Please log in.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
