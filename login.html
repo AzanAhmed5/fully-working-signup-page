@@ -74,7 +74,7 @@
       const emailOrUser = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
 
-      let users = JSON.parse(sessionStorage.getItem('users')) || [];
+      let users = JSON.parse(localStorage.getItem('users')) || [];
 
       
       const found = users.find(u =>

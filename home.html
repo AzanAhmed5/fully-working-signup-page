@@ -3,58 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home_ Instagram</title>
-  <style>
-    body {
-      background-color: black;
-      font-family: Helvetica, Arial, sans-serif;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    h1 {
-      color: #00ffff;
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    .btn {
-      background-color: rgb(15, 26, 185);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .btn:hover {
-      background-color: rgb(10, 20, 150);
-    }
-  </style>
+  <title>HOME PAGE</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 id="welcome-text">🎉 Welcome!</h1>
-  <p>You're successfully logged in.</p>
-  
+  <div class="todo-container">
+    <h2>To-Do List</h2>
+
+    <div>
+      <input type="text" id="taskInput" placeholder="Enter a task!">
+      <button onclick="addTask()">Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+  </div>
 
   <script>
-    const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
 
-    if (!user) {
-      alert("Please log in first!");
-      window.location.href = "login.html";
-    } else {
-      document.getElementById("welcome-text").innerText = `🎉 Welcome, ${user.username}!`;
+   
+    window.onload = function() {
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      if (users.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "No user data found. Please sign up first.";
+        taskList.appendChild(li);
+        return;
+      }
+
+
+      users.forEach(user => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>Username:</strong> ${user.username}<br>
+          <strong>Phone:</strong> ${user.number}<br>
+          <strong>Email:</strong> ${user.email}<br>
+          <strong>Password:</strong> ${user.password}<br>
+        `;
+        taskList.appendChild(li);
+      });
+    };
+
+    function addTask() {
+      const taskValue = taskInput.value.trim();
+
+      if (taskValue === "") {
+        alert("Please enter a task!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = taskValue;
+
+      taskList.appendChild(li);
+      taskInput.value = "";
     }
-
-    
   </script>
 </body>
 </html>
